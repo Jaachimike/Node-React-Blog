@@ -1,27 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { formatISO9075 } from "date-fns";
 
-const Post = () => {
+const Post = ({ _id, title, summary, cover, content, createdAt, author }) => {
   return (
     <div className="post">
       <div className="image">
-        <img
-          src="https://techcrunch.com/wp-content/uploads/2019/08/GettyImages-1158411075.jpg?w=1390&crop=1"
-          alt=""
-        />
+        <Link to={`/post/${_id}`}>
+          <img src={"http://localhost:4000/" + cover} alt="" />
+        </Link>
       </div>
 
       <div className=" texts">
-        <h2>Full-house battery backup coming later this year</h2>
+        <Link to={`/post/${_id}`}>
+          <h2>{title}</h2>
+        </Link>
+
         <p className="info">
-          <a className="author">Jaachi Okafor</a>
-          <time>16-02-2024 15:53</time>
+          <a className="author">{author.username}</a>
+          <time>{formatISO9075(new Date(createdAt))}</time>
         </p>
-        <p className="summary">
-          After scaling back operations and reassigning staff to other projects,
-          Tumblr owner Automattic’s CEO Matt Mullenweg said that the company
-          would home in on the parts of Tumblr’s service that worked and kill
-          those that didn’t —
-        </p>
+        <p className="summary">{summary}</p>
       </div>
     </div>
   );
